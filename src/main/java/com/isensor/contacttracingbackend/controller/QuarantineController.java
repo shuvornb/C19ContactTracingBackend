@@ -1,4 +1,4 @@
-package com.isensor.contacttracingbackend.controller.web;
+package com.isensor.contacttracingbackend.controller;
 
 import com.isensor.contacttracingbackend.communication.request.StartQuarantineRequest;
 import com.isensor.contacttracingbackend.communication.response.OKResponse;
