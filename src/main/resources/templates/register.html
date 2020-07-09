@@ -1,0 +1,682 @@
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+  <head>
+	<script src="../js/bootstrap.min.js"></script>
+    <title>Register</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="container">
+	<div class="card bg-light">
+	<article class="card-body mx-auto" style="max-width: 400px;">
+	<h4 class="card-title mt-3 text-center">Create Account</h4>
+	<p class="text-center">Get started with your free account</p>
+	<form th:action="@{/register/user}" th:object="${registrationData}" method="post">
+	<div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input id="firstName" th:field="*{firstName}" name="" class="form-control" placeholder="First name" type="text">
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+        <input id="lastName" th:field="*{lastName}" name="" class="form-control" placeholder="Last name" type="text">
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+		 </div>
+        <input th:field="*{email}" name="" class="form-control" placeholder="Email address" type="email">
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-mars"></i> </span>
+		</div>
+		<select th:field="*{gender}" class="custom-select">
+		    <option selected="" value="Gender">Gender</option>
+		    <option value="Male">Male</option>
+		    <option value="Female">Female</option>
+		    <option value="Transgender male">Transgender male</option>
+		    <option value="Transgender female">Transgender female</option>
+		    <option value="Gender variant/non-confirming">Gender variant/non-confirming</option>
+		    <option value="Prefer not to answer">Prefer not to answer</option>
+		</select>
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+		</div>
+		<select class="custom-select" style="max-width: 120px;">
+		    <option selected="">+1</option>
+		</select>
+    	<input th:field="*{phoneNumber}" name="" class="form-control" placeholder="Phone number" type="text">
+    </div> <!-- form-group// -->
+
+    <div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-birthday-cake"></i> </span>
+		 </div>
+        <input th:field="*{dateOfBirth}" name="" class="form-control" type="text" placeholder="Date of Birth" onfocus="(this.type='date')">
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-address-book"></i> </span>
+		 </div>
+        <input th:field="*{addressLine1}" name="" class="form-control" placeholder="Address Line 1" type="text">
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-address-book"></i> </span>
+		 </div>
+        <input th:field="*{addressLine2}" name="" class="form-control" placeholder="Address Line 2" type="text">
+    </div> <!-- form-group// -->
+
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+		</div>
+		<select th:field="*{city}" class="form-control">
+			<option selected="" value="City">City</option>
+			<option value="Tallahassee">Tallahassee</option>
+			<option value="Alachua">Alachua</option>
+			<option value="Altamonte Springs">Altamonte Springs</option>
+			<option value="Anna Maria">Anna Maria</option>
+			<option value="Apalachicola">Apalachicola</option>
+			<option value="Apopka">Apopka</option>
+			<option value="Atlantic Beach">Atlantic Beach</option>
+			<option value="Auburndale">Auburndale</option>
+			<option value="Aventura">Aventura</option>
+			<option value="Avon Park">Avon Park</option>
+			<option value="Bal Harbour">Bal Harbour</option>
+			<option value="Bartow">Bartow</option>
+			<option value="Bay Harbor Islands">Bay Harbor Islands</option>
+			<option value="Boca Raton">Boca Raton</option>
+			<option value="Bonita Springs">Bonita Springs</option>
+			<option value="Boynton Beach">Boynton Beach</option>
+			<option value="Bradenton">Bradenton</option>
+			<option value="Brooksville">Brooksville</option>
+			<option value="Cape Canaveral">Cape Canaveral</option>
+			<option value="Cape Coral">Cape Coral</option>
+			<option value="Casselberry">Casselberry</option>
+			<option value="Celebration">Celebration</option>
+			<option value="Chipley">Chipley</option>
+			<option value="Cinco Bayou">Cinco Bayou</option>
+			<option value="Clearwater">Clearwater</option>
+			<option value="Clermont">Clermont</option>
+			<option value="Clewiston">Clewiston</option>
+			<option value="Cocoa">Cocoa</option>
+			<option value="Cocoa Beach">Cocoa Beach</option>
+			<option value="Coconut Creek">Coconut Creek</option>
+			<option value="Coral Gables">Coral Gables</option>
+			<option value="Coral Springs">Coral Springs</option>
+			<option value="Crystal River">Crystal River</option>
+			<option value="Dania Beach">Dania Beach</option>
+			<option value="Davie">Davie</option>
+			<option value="Daytona Beach">Daytona Beach</option>
+			<option value="Deerfield Beach">Deerfield Beach</option>
+			<option value="DeFuniak Springs">DeFuniak Springs</option>
+			<option value="DeLand">DeLand</option>
+			<option value="Delray Beach">Delray Beach</option>
+			<option value="Deltona">Deltona</option>
+			<option value="Destin">Destin</option>
+			<option value="Dunedin">Dunedin</option>
+			<option value="Eagle Lake">Eagle Lake</option>
+			<option value="Edgewater">Edgewater</option>
+			<option value="Edgewood">Edgewood</option>
+			<option value="Eustis">Eustis</option>
+			<option value="Fort Lauderdale">Fort Lauderdale</option>
+			<option value="Fort Meade">Fort Meade</option>
+			<option value="Fort Myers">Fort Myers</option>
+			<option value="Fort Myers Beach">Fort Myers Beach</option>
+			<option value="Fort Pierce">Fort Pierce</option>
+			<option value="Fort Walton Beach">Fort Walton Beach</option>
+			<option value="Fruitland Park">Fruitland Park</option>
+			<option value="Gainesville">Gainesville</option>
+			<option value="Greenacres">Greenacres</option>
+			<option value="Green Cove Springs">Green Cove Springs</option>
+			<option value="Gulf Breeze">Gulf Breeze</option>
+			<option value="Gulfport">Gulfport</option>
+			<option value="Haines City">Haines City</option>
+			<option value="Hallandale Beach">Hallandale Beach</option>
+			<option value="Hawthorne">Hawthorne</option>
+			<option value="Hialeah">Hialeah</option>
+			<option value="Hialeah Gardens">Hialeah Gardens</option>
+			<option value="Highland Beach">Highland Beach</option>
+			<option value="Hollywood">Hollywood</option>
+			<option value="Holly Hill">Holly Hill</option>
+			<option value="Holmes Beach">Holmes Beach</option>
+			<option value="Homestead">Homestead</option>
+			<option value="Hypoluxo">Hypoluxo</option>
+			<option value="Indialantic">Indialantic</option>
+			<option value="Jacksonville">Jacksonville</option>
+			<option value="Juno Beach">Juno Beach</option>
+			<option value="Jupiter">Jupiter</option>
+			<option value="Key Biscayne">Key Biscayne</option>
+			<option value="Key West">Key West</option>
+			<option value="Kissimmee">Kissimmee</option>
+			<option value="LaBelle">LaBelle</option>
+			<option value="Lady Lake">Lady Lake</option>
+			<option value="Lake Alfred">Lake Alfred</option>
+			<option value="Lakeland">Lakeland</option>
+			<option value="Lake Mary">Lake Mary</option>
+			<option value="Lake Park">Lake Park</option>
+			<option value="Lake Wales">Lake Wales</option>
+			<option value="Lake Worth">Lake Worth</option>
+			<option value="Lantana">Lantana</option>
+			<option value="Largo">Largo</option>
+			<option value="Lauderdale By The Sea">Lauderdale By The Sea</option>
+			<option value="Lauderhill">Lauderhill</option>
+			<option value="Leesburg">Leesburg</option>
+			<option value="Lighthouse Point">Lighthouse Point</option>
+			<option value="Longboat Key">Longboat Key</option>
+			<option value="Longwood">Longwood</option>
+			<option value="Maitland">Maitland</option>
+			<option value="Marco Island">Marco Island</option>
+			<option value="Margate">Margate</option>
+			<option value="Melbourne">Melbourne</option>
+			<option value="Melbourne Beach">Melbourne Beach</option>
+			<option value="Miami">Miami</option>
+			<option value="Miami Beach">Miami Beach</option>
+			<option value="Milton">Milton</option>
+			<option value="Minneola">Minneola</option>
+			<option value="Miramar">Miramar</option>
+			<option value="Mount Dora">Mount Dora</option>
+			<option value="Naples">Naples</option>
+			<option value="Neptune Beach">Neptune Beach</option>
+			<option value="New Port Richey">New Port Richey</option>
+			<option value="New Smyrna Beach">New Smyrna Beach</option>
+			<option value="Niceville">Niceville</option>
+			<option value="North Miami">North Miami</option>
+			<option value="North Miami Beach">North Miami Beach</option>
+			<option value="North Port">North Port</option>
+			<option value="Oakland Park">Oakland Park</option>
+			<option value="Ocala">Ocala</option>
+			<option value="Ocean Ridge">Ocean Ridge</option>
+			<option value="Ocoee">Ocoee</option>
+			<option value="Okeechobee">Okeechobee</option>
+			<option value="Oldsmar">Oldsmar</option>
+			<option value="Orange Park">Orange Park</option>
+			<option value="Orlando">Orlando</option>
+			<option value="Ormond Beach">Ormond Beach</option>
+			<option value="Oviedo">Oviedo</option>
+			<option value="Palatka">Palatka</option>
+			<option value="Palm Bay">Palm Bay</option>
+			<option value="Palm Beach">Palm Beach</option>
+			<option value="Palm Beach Gardens">Palm Beach Gardens</option>
+			<option value="Palm Coast">Palm Coast</option>
+			<option value="Palmetto">Palmetto</option>
+			<option value="Panama City">Panama City</option>
+			<option value="Panama City Beach">Panama City Beach</option>
+			<option value="Pembroke Pines">Pembroke Pines</option>
+			<option value="Pensacola">Pensacola</option>
+			<option value="Pinecrest">Pinecrest</option>
+			<option value="Pinellas Park">Pinellas Park</option>
+			<option value="Plant City">Plant City</option>
+			<option value="Plantation">Plantation</option>
+			<option value="Pompano Beach">Pompano Beach</option>
+			<option value="Ponce Inlet">Ponce Inlet</option>
+			<option value="Port Orange">Port Orange</option>
+			<option value="Port St. Lucie">Port St. Lucie</option>
+			<option value="Punta Gorda">Punta Gorda</option>
+			<option value="Rockledge">Rockledge</option>
+			<option value="Royal Palm Beach">Royal Palm Beach</option>
+			<option value="St. Augustine">St. Augustine</option>
+			<option value="St. Augustine Beach">St. Augustine Beach</option>
+			<option value="St. Cloud">St. Cloud</option>
+			<option value="St. Pete Beach">St. Pete Beach</option>
+			<option value="St. Petersburg">St. Petersburg</option>
+			<option value="Safety Harbor">Safety Harbor</option>
+			<option value="Sanford">Sanford</option>
+			<option value="Sanibel">Sanibel</option>
+			<option value="Sarasota">Sarasota</option>
+			<option value="Satellite Beach">Satellite Beach</option>
+			<option value="Seaside">Seaside</option>
+			<option value="Sebastian">Sebastian</option>
+			<option value="Sewall\s Point">Sewall\s Point</option>
+			<option value="Shalimar">Shalimar</option>
+			<option value="Stuart">Stuart</option>
+			<option value="Surfside">Surfside</option>
+			<option value="Tamarac">Tamarac</option>
+			<option value="Tampa">Tampa</option>
+			<option value="Tarpon Springs">Tarpon Springs</option>
+			<option value="Tavares">Tavares</option>
+			<option value="Temple Terrace">Temple Terrace</option>
+			<option value="Titusville">Titusville</option>
+			<option value="Treasure Island">Treasure Island</option>
+			<option value="Valparaiso">Valparaiso</option>
+			<option value="Venice">Venice</option>
+			<option value="Vero Beach">Vero Beach</option>
+			<option value="Wellington">Wellington</option>
+			<option value="West Melbourne">West Melbourne</option>
+			<option value="West Palm Beach">West Palm Beach</option>
+			<option value="Weston">Weston</option>
+			<option value="Wilton Manors">Wilton Manors</option>
+			<option value="Winter Garden">Winter Garden</option>
+			<option value="Winter Haven">Winter Haven</option>
+			<option value="Winter Park">Winter Park</option>
+			<option value="Winter Springs">Winter Springs</option>
+		</select>
+	</div> <!-- form-group end.// -->
+	<div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+		</div>
+		<select th:field="*{county}" class="form-control">
+			<option selected="" value="County">County</option>
+			<option value="Leon">Leon</option>
+			<option value="Alachua">Alachua</option>
+			<option value="Baker">Baker</option>
+			<option value="Bay">Bay</option>
+			<option value="Bradford">Bradford</option>
+			<option value="Brevard">Brevard</option>
+			<option value="Broward">Broward</option>
+			<option value="Calhoun">Calhoun</option>
+			<option value="Charlotte">Charlotte</option>
+			<option value="Citrus">Citrus</option>
+			<option value="Clay">Clay</option>
+			<option value="Collier">Collier</option>
+			<option value="Columbia">Columbia</option>
+			<option value="DeSoto">DeSoto</option>
+			<option value="Dixie">Dixie</option>
+			<option value="Duval">Duval</option>
+			<option value="Escambia">Escambia</option>
+			<option value="Flagler">Flagler</option>
+			<option value="Franklin">Franklin</option>
+			<option value="Gadsden">Gadsden</option>
+			<option value="Gilchrist">Gilchrist</option>
+			<option value="Glades">Glades</option>
+			<option value="Gulf">Gulf</option>
+			<option value="Hamilton">Hamilton</option>
+			<option value="Hardee">Hardee</option>
+			<option value="Hendry">Hendry</option>
+			<option value="Hernando">Hernando</option>
+			<option value="Highlands">Highlands</option>
+			<option value="Hillsborough">Hillsborough</option>
+			<option value="Holmes">Holmes</option>
+			<option value="Indian River">Indian River</option>
+			<option value="Jackson">Jackson</option>
+			<option value="Jefferson">Jefferson</option>
+			<option value="Lafayette">Lafayette</option>
+			<option value="Lake">Lake</option>
+			<option value="Lee">Lee</option>
+			<option value="Levy">Levy</option>
+			<option value="Liberty">Liberty</option>
+			<option value="Madison">Madison</option>
+			<option value="Manatee">Manatee</option>
+			<option value="Marion">Marion</option>
+			<option value="Martin">Martin</option>
+			<option value="Miami-Dade">Miami-Dade</option>
+			<option value="Monroe">Monroe</option>
+			<option value="Nassau">Nassau</option>
+			<option value="Okaloosa">Okaloosa</option>
+			<option value="Okeechobee">Okeechobee</option>
+			<option value="Orange">Orange</option>
+			<option value="Osceola">Osceola</option>
+			<option value="Palm Beach">Palm Beach</option>
+			<option value="Pasco">Pasco</option>
+			<option value="Pinellas">Pinellas</option>
+			<option value="Polk">Polk</option>
+			<option value="Putnam">Putnam</option>
+			<option value="Santa Rosa">Santa Rosa</option>
+			<option value="Sarasota">Sarasota</option>
+			<option value="Seminole">Seminole</option>
+			<option value="St. Johns">St. Johns</option>
+			<option value="St. Lucie">St. Lucie</option>
+			<option value="Sumter">Sumter</option>
+			<option value="Suwannee">Suwannee</option>
+			<option value="Taylor">Taylor</option>
+			<option value="Union">Union</option>
+			<option value="Volusia">Volusia</option>
+			<option value="Wakulla">Wakulla</option>
+			<option value="Walton">Walton</option>
+			<option value="Washington">Washington</option>
+		</select>
+	</div> <!-- form-group end.// -->
+	<div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-map-marker"></i> </span>
+		 </div>
+        <input th:field="*{zipcode}" name="" class="form-control" placeholder="Zipcode" type="text">
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-globe"></i> </span>
+		</div>
+		<select th:field="*{state}" class="form-control">
+			<option selected="" value="State">State</option>
+			<option value="Florida">Florida</option>
+			<option value="Alabama">Alabama</option>
+			<option value="Alaska">Alaska</option>
+			<option value="Arizona">Arizona</option>
+			<option value="Arkansas">Arkansas</option>
+			<option value="California">California</option>
+			<option value="Colorado">Colorado</option>
+			<option value="Connecticut">Connecticut</option>
+			<option value="Delaware">Delaware</option>
+			<option value="District Of Columbia">District Of Columbia</option>
+			<option value="Georgia">Georgia</option>
+			<option value="Hawaii">Hawaii</option>
+			<option value="Idaho">Idaho</option>
+			<option value="Illinois">Illinois</option>
+			<option value="Indiana">Indiana</option>
+			<option value="Iowa">Iowa</option>
+			<option value="Kansas">Kansas</option>
+			<option value="Kentucky">Kentucky</option>
+			<option value="Louisiana">Louisiana</option>
+			<option value="Maine">Maine</option>
+			<option value="Maryland">Maryland</option>
+			<option value="Massachusetts">Massachusetts</option>
+			<option value="Michigan">Michigan</option>
+			<option value="Minnesota">Minnesota</option>
+			<option value="Mississippi">Mississippi</option>
+			<option value="Missouri">Missouri</option>
+			<option value="Montana">Montana</option>
+			<option value="Nebraska">Nebraska</option>
+			<option value="Nevada">Nevada</option>
+			<option value="New Hampshire">New Hampshire</option>
+			<option value="New Jersey">New Jersey</option>
+			<option value="New Mexico">New Mexico</option>
+			<option value="New York">New York</option>
+			<option value="North Carolina">North Carolina</option>
+			<option value="North Dakota">North Dakota</option>
+			<option value="Ohio">Ohio</option>
+			<option value="Oklahoma">Oklahoma</option>
+			<option value="Oregon">Oregon</option>
+			<option value="Pennsylvania">Pennsylvania</option>
+			<option value="Rhode Island">Rhode Island</option>
+			<option value="South Carolina">South Carolina</option>
+			<option value="South Dakota">South Dakota</option>
+			<option value="Tennessee">Tennessee</option>
+			<option value="Texas">Texas</option>
+			<option value="Utah">Utah</option>
+			<option value="Vermont">Vermont</option>
+			<option value="Virginia">Virginia</option>
+			<option value="Washington">Washington</option>
+			<option value="West Virginia">West Virginia</option>
+			<option value="Wisconsin">Wisconsin</option>
+			<option value="Wyoming">Wyoming</option>
+		</select>
+	</div> <!-- form-group end.// -->
+	<div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-globe"></i> </span>
+		</div>
+		<select th:field="*{country}" class="form-control">
+			<option selected="" value="Country">Country</option>
+			<option value="United States of America">United States of America</option>
+			<option value="Afghanistan">Afghanistan</option>
+			<option value="Albania">Albania</option>
+			<option value="Algeria">Algeria</option>
+			<option value="American Samoa">American Samoa</option>
+			<option value="Andorra">Andorra</option>
+			<option value="Angola">Angola</option>
+			<option value="Anguilla">Anguilla</option>
+			<option value="Antigua/Barbuda">Antigua/Barbuda</option>
+			<option value="Argentina">Argentina</option>
+			<option value="Armenia">Armenia</option>
+			<option value="Aruba">Aruba</option>
+			<option value="Australia">Australia</option>
+			<option value="Austria">Austria</option>
+			<option value="Azerbaijan">Azerbaijan</option>
+			<option value="Bahamas">Bahamas</option>
+			<option value="Bahrain">Bahrain</option>
+			<option value="Bangladesh">Bangladesh</option>
+			<option value="Barbados">Barbados</option>
+			<option value="Belarus">Belarus</option>
+			<option value="Belgium">Belgium</option>
+			<option value="Belize">Belize</option>
+			<option value="Benin">Benin</option>
+			<option value="Bermuda">Bermuda</option>
+			<option value="Bhutan">Bhutan</option>
+			<option value="Bolivia">Bolivia</option>
+			<option value="Bonaire">Bonaire</option>
+			<option value="Bosnia/Herzegovina">Bosnia/Herzegovina</option>
+			<option value="Botswana">Botswana</option>
+			<option value="Brazil">Brazil</option>
+			<option value="British Indian Ocean Ter">British Indian Ocean Ter</option>
+			<option value="Brunei">Brunei</option>
+			<option value="Bulgaria">Bulgaria</option>
+			<option value="Burkina Faso">Burkina Faso</option>
+			<option value="Burundi">Burundi</option>
+			<option value="Cambodia">Cambodia</option>
+			<option value="Cameroon">Cameroon</option>
+			<option value="Canada">Canada</option>
+			<option value="Canary Islands">Canary Islands</option>
+			<option value="Cape Verde">Cape Verde</option>
+			<option value="Cayman Islands">Cayman Islands</option>
+			<option value="Central African Republic">Central African Republic</option>
+			<option value="Chad">Chad</option>
+			<option value="Channel Islands">Channel Islands</option>
+			<option value="Chile">Chile</option>
+			<option value="China">China</option>
+			<option value="Christmas Island">Christmas Island</option>
+			<option value="Cocos Island">Cocos Island</option>
+			<option value="Colombia">Colombia</option>
+			<option value="Comoros">Comoros</option>
+			<option value="Congo">Congo</option>
+			<option value="Cook Islands">Cook Islands</option>
+			<option value="Costa Rica">Costa Rica</option>
+			<option value="Cote DIvoire">Cote DIvoire</option>
+			<option value="Croatia">Croatia</option>
+			<option value="Cuba">Cuba</option>
+			<option value="Curacao">Curacao</option>
+			<option value="Cyprus">Cyprus</option>
+			<option value="Czech Republic">Czech Republic</option>
+			<option value="Denmark">Denmark</option>
+			<option value="Djibouti">Djibouti</option>
+			<option value="Dominica">Dominica</option>
+			<option value="Dominican Republic">Dominican Republic</option>
+			<option value="East Timor">East Timor</option>
+			<option value="Ecuador">Ecuador</option>
+			<option value="Egypt">Egypt</option>
+			<option value="El Salvador">El Salvador</option>
+			<option value="Equatorial Guinea">Equatorial Guinea</option>
+			<option value="Eritrea">Eritrea</option>
+			<option value="Estonia">Estonia</option>
+			<option value="Ethiopia">Ethiopia</option>
+			<option value="Falkland Islands">Falkland Islands</option>
+			<option value="Faroe Islands">Faroe Islands</option>
+			<option value="Fiji">Fiji</option>
+			<option value="Finland">Finland</option>
+			<option value="France">France</option>
+			<option value="French Guiana">French Guiana</option>
+			<option value="French Polynesia">French Polynesia</option>
+			<option value="French Southern Ter">French Southern Ter</option>
+			<option value="Gabon">Gabon</option>
+			<option value="Gambia">Gambia</option>
+			<option value="Georgia">Georgia</option>
+			<option value="Germany">Germany</option>
+			<option value="Ghana">Ghana</option>
+			<option value="Gibraltar">Gibraltar</option>
+			<option value="Great Britain">Great Britain</option>
+			<option value="Greece">Greece</option>
+			<option value="Greenland">Greenland</option>
+			<option value="Grenada">Grenada</option>
+			<option value="Guadeloupe">Guadeloupe</option>
+			<option value="Guam">Guam</option>
+			<option value="Guaitemala">Guaitemala</option>
+			<option value="Guinea">Guinea</option>
+			<option value="Guyana">Guyana</option>
+			<option value="Haiti">Haiti</option>
+			<option value="Hawaii">Hawaii</option>
+			<option value="Honduras">Honduras</option>
+			<option value="Hong Kong">Hong Kong</option>
+			<option value="Hungary">Hungary</option>
+			<option value="Iceland">Iceland</option>
+			<option value="Indonesia">Indonesia</option>
+			<option value="India">India</option>
+			<option value="Iran">Iran</option>
+			<option value="Iraq">Iraq</option>
+			<option value="Ireland">Ireland</option>
+			<option value="Isle of Man">Isle of Man</option>
+			<option value="Israel">Israel</option>
+			<option value="Italy">Italy</option>
+			<option value="Jamaica">Jamaica</option>
+			<option value="Japan">Japan</option>
+			<option value="Jordan">Jordan</option>
+			<option value="Kazakhstan">Kazakhstan</option>
+			<option value="Kenya">Kenya</option>
+			<option value="Kiribati">Kiribati</option>
+			<option value="Korea North">Korea North</option>
+			<option value="Korea South">Korea South</option>
+			<option value="Kuwait">Kuwait</option>
+			<option value="Kyrgyzstan">Kyrgyzstan</option>
+			<option value="Laos">Laos</option>
+			<option value="Latvia">Latvia</option>
+			<option value="Lebanon">Lebanon</option>
+			<option value="Lesotho">Lesotho</option>
+			<option value="Liberia">Liberia</option>
+			<option value="Libya">Libya</option>
+			<option value="Liechtenstein">Liechtenstein</option>
+			<option value="Lithuania">Lithuania</option>
+			<option value="Luxembourg">Luxembourg</option>
+			<option value="Macau">Macau</option>
+			<option value="Macedonia">Macedonia</option>
+			<option value="Madagascar">Madagascar</option>
+			<option value="Malaysia">Malaysia</option>
+			<option value="Malawi">Malawi</option>
+			<option value="Maldives">Maldives</option>
+			<option value="Mali">Mali</option>
+			<option value="Malta">Malta</option>
+			<option value="Marshall Islands">Marshall Islands</option>
+			<option value="Martinique">Martinique</option>
+			<option value="Mauritania">Mauritania</option>
+			<option value="Mauritius">Mauritius</option>
+			<option value="Mayotte">Mayotte</option>
+			<option value="Mexico">Mexico</option>
+			<option value="Midway Islands">Midway Islands</option>
+			<option value="Moldova">Moldova</option>
+			<option value="Monaco">Monaco</option>
+			<option value="Mongolia">Mongolia</option>
+			<option value="Montserrat">Montserrat</option>
+			<option value="Morocco">Morocco</option>
+			<option value="Mozambique">Mozambique</option>
+			<option value="Myanmar">Myanmar</option>
+			<option value="Nambia">Nambia</option>
+			<option value="Nauru">Nauru</option>
+			<option value="Nepal">Nepal</option>
+			<option value="Netherland Antilles">Netherland Antilles</option>
+			<option value="Netherlands (Holland, Europe)">Netherlands (Holland, Europe)</option>
+			<option value="Nevis">Nevis</option>
+			<option value="New Caledonia">New Caledonia</option>
+			<option value="New Zealand">New Zealand</option>
+			<option value="Nicaragua">Nicaragua</option>
+			<option value="Niger">Niger</option>
+			<option value="Nigeria">Nigeria</option>
+			<option value="Niue">Niue</option>
+			<option value="Norfolk Island">Norfolk Island</option>
+			<option value="Norway">Norway</option>
+			<option value="Oman">Oman</option>
+			<option value="Pakistan">Pakistan</option>
+			<option value="Palau Island">Palau Island</option>
+			<option value="Palestine">Palestine</option>
+			<option value="Panama">Panama</option>
+			<option value="Papua New Guinea">Papua New Guinea</option>
+			<option value="Paraguay">Paraguay</option>
+			<option value="Peru">Peru</option>
+			<option value="Philippines">Philippines</option>
+			<option value="Pitcairn Island">Pitcairn Island</option>
+			<option value="Poland">Poland</option>
+			<option value="Portugal">Portugal</option>
+			<option value="Puerto Rico">Puerto Rico</option>
+			<option value="Qatar">Qatar</option>
+			<option value="Republic of Montenegro">Republic of Montenegro</option>
+			<option value="Republic of Serbia">Republic of Serbia</option>
+			<option value="Reunion">Reunion</option>
+			<option value="Romania">Romania</option>
+			<option value="Russia">Russia</option>
+			<option value="Rwanda">Rwanda</option>
+			<option value="St Barthelemy">St Barthelemy</option>
+			<option value="St Eustatius">St Eustatius</option>
+			<option value="St Helena">St Helena</option>
+			<option value="St Kitts-Nevis">St Kitts-Nevis</option>
+			<option value="St Lucia">St Lucia</option>
+			<option value="St Maarten">St Maarten</option>
+			<option value="St Pierre/Miquelon">St Pierre/Miquelon</option>
+			<option value="St Vincent/Grenadines">St Vincent/Grenadines</option>
+			<option value="Saipan">Saipan</option>
+			<option value="Samoa">Samoa</option>
+			<option value="Samoa American">Samoa American</option>
+			<option value="San Marino">San Marino</option>
+			<option value="Sao Tome/Principe">Sao Tome/Principe</option>
+			<option value="Saudi Arabia">Saudi Arabia</option>
+			<option value="Senegal">Senegal</option>
+			<option value="Seychelles">Seychelles</option>
+			<option value="Sierra Leone">Sierra Leone</option>
+			<option value="Singapore">Singapore</option>
+			<option value="Slovakia">Slovakia</option>
+			<option value="Slovenia">Slovenia</option>
+			<option value="Solomon Islands">Solomon Islands</option>
+			<option value="Somalia">Somalia</option>
+			<option value="South Africa">South Africa</option>
+			<option value="Spain">Spain</option>
+			<option value="Sri Lanka">Sri Lanka</option>
+			<option value="Sudan">Sudan</option>
+			<option value="Suriname">Suriname</option>
+			<option value="Swaziland">Swaziland</option>
+			<option value="Sweden">Sweden</option>
+			<option value="Switzerland">Switzerland</option>
+			<option value="Syria">Syria</option>
+			<option value="Tahiti">Tahiti</option>
+			<option value="Taiwan">Taiwan</option>
+			<option value="Tajikistan">Tajikistan</option>
+			<option value="Tanzania">Tanzania</option>
+			<option value="Thailand">Thailand</option>
+			<option value="Togo">Togo</option>
+			<option value="Tokelau">Tokelau</option>
+			<option value="Tonga">Tonga</option>
+			<option value="Trinidad/Tobago">Trinidad/Tobago</option>
+			<option value="Tunisia">Tunisia</option>
+			<option value="Turkey">Turkey</option>
+			<option value="Turkmenistan">Turkmenistan</option>
+			<option value="Turks/Caicos Is">Turks/Caicos Is</option>
+			<option value="Tuvalu">Tuvalu</option>
+			<option value="Uganda">Uganda</option>
+			<option value="United Kingdom">United Kingdom</option>
+			<option value="Ukraine">Ukraine</option>
+			<option value="United Arab Emirates">United Arab Emirates</option>
+			<option value="Uruguay">Uruguay</option>
+			<option value="Uzbekistan">Uzbekistan</option>
+			<option value="Vanuatu">Vanuatu</option>
+			<option value="Vatican City State">Vatican City State</option>
+			<option value="Venezuela">Venezuela</option>
+			<option value="Vietnam">Vietnam</option>
+			<option value="Virgin Islands (Brit)">Virgin Islands (Brit)</option>
+			<option value="Virgin Islands (USA)">Virgin Islands (USA)</option>
+			<option value="Wake Island">Wake Island</option>
+			<option value="Wallis/Futana Is">Wallis/Futana Is</option>
+			<option value="Yemen">Yemen</option>
+			<option value="Zaire">Zaire</option>
+			<option value="Zambia">Zambia</option>
+			<option value="Zimbabwe">Zimbabwe</option>
+		</select>
+	</div> <!-- form-group end.// -->
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		</div>
+        <input th:field="*{password}" class="form-control" placeholder="Create password" type="password">
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		</div>
+        <input class="form-control" placeholder="Repeat password" type="password">
+    </div> <!-- form-group// -->
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+    </div> <!-- form-group// -->
+	</form>
+		<p class="mt-5 mb-3 text-muted text-center">&copy; iSensor Lab, Florida State University</p>
+	</article>
+	</div> <!-- card.// -->
+
+	</div> 
+<!--container end.//-->
+  </body>
+</html>

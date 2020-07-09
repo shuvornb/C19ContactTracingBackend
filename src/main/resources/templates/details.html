@@ -1,0 +1,58 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>details</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/grid/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../css/grid.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container">
+
+      <h2>Patient Details</h2>
+      <h5>Name</h5><p class="lead" th:text="${patientInfo.name}"></p>
+      <h5>Phone Number</h5><p class="lead" th:text="${patientInfo.phoneNumber}"></p>
+      <h5>Address</h5><p class="lead" th:text="${patientInfo.address}"></p>
+      <h5>Gender</h5><p class="lead" th:text="${patientInfo.gender}"></p>
+      <h5>Age</h5><p class="lead" th:text="${patientInfo.age}"></p>
+
+      <h2>Reported Symptoms</h2>
+      <table class="table table-bordered">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Symptom</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+        <tbody>
+        <tr th:each="symptom : ${symptoms}">
+          <th scope="row" th:text="${symptom.serialNo}"></th>
+          <td th:text="${symptom.symptomName}"></td>
+          <td th:text="${symptom.symptomStatus}"></td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="text-center"><button type="button" class="btn btn-primary" id="testButton" >Initiate Test</button></div>
+    </div> <!-- /container -->
+  </body>
+</html>
+
+<script type="text/javascript">
+    document.getElementById("testButton").onclick = function () {
+        location.href = "[[${testURL}]]";
+    };
+</script>

@@ -1,0 +1,94 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+  <title>dashboard</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/grid/">
+
+  <!-- Bootstrap core CSS -->
+  <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/grid.css" rel="stylesheet">
+</head>
+
+<body>
+<div class="container">
+  <h2>Test Center Information</h2>
+  <h5>Name</h5><p class="lead" th:text="${testCenterDetails.title}"></p>
+  <h5>ID</h5><p class="lead" th:text="${testCenterDetails.username}"></p>
+  <h5>Address</h5><p class="lead" th:text="${testCenterDetails.address}"></p>
+  <h5>Hours</h5><p class="lead" th:text="${testCenterDetails.hours}"></p>
+  <h5>Phone Number</h5><p class="lead" th:text="${testCenterDetails.phone}"></p>
+  <h5>Criteria</h5><p class="lead" th:text="${testCenterDetails.criteria}"></p>
+
+  <br>
+  <hr>
+  <br>
+
+  <h2>Patient List (Self Reported)</h2>
+  <p class="lead">Patients who reported their symptoms by themselves. Click on each patient to see his/her details</p>
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Reporting Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="report : ${selfReportList}">
+      <th scope="row" th:text="${report.serialNo}"></th>
+      <td><a th:href="${report.reportURL}" th:text="${report.name}"></a></td>
+      <td th:text="${report.phoneNumber}"></td>
+      <td th:text="${report.reportingTime}"></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <br>
+  <hr>
+  <br>
+
+  <h2>Patient List (Active)</h2>
+  <p class="lead">Patients who are currently treated in this center.</p>
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+    <tr>
+      <th class="text-center" scope="col">#</th>
+      <th class="text-center" scope="col">Name</th>
+      <th class="text-center" scope="col">Phone Number</th>
+      <th class="text-center" scope="col">Activation Time</th>
+      <th class="text-center" scope="col">Deactivation Time</th>
+      <th class="text-center" scope="col">Tracking Status</th>
+      <th class="text-center" scope="col">Test Result</th>
+      <th class="text-center" scope="col">Update</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="patient : ${activePatientList}">
+      <th class="text-center" scope="row" th:text="${patient.serialNo}"></th>
+      <td class="text-center" th:text="${patient.name}"></td>
+      <td class="text-center" th:text="${patient.phoneNumber}"></td>
+      <td class="text-center" th:text="${patient.activationTime}"></td>
+      <td class="text-center" th:text="${patient.deactivationTime}"></td>
+      <td class="text-center" th:text="${patient.tracingStatus}"></td>
+      <td class="text-center" th:text="${patient.testResult}"></td>
+      <td>
+        <a th:href="${patient.testResultURL}"><button style="display: block; margin: auto;" type="button" class="btn btn-danger btn-sm my-0">Update Results</button></a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div> <!-- /container -->
+</body>
+</html>
