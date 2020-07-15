@@ -2,6 +2,7 @@ package com.isensor.contacttracingbackend.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.isensor.contacttracingbackend.communication.request.EndQuarantineRequest;
 import com.isensor.contacttracingbackend.communication.request.StartQuarantineRequest;
 import com.isensor.contacttracingbackend.communication.request.UpdateHomeLocationRequest;
 import com.isensor.contacttracingbackend.db.entity.C19QuarantineStatus;
@@ -61,5 +62,19 @@ public class QuarantineService {
         alreadyActiveQuarantine.homeLocationCoordinates = homeLocationJSONString;
         quarantineStatusRepository.save(alreadyActiveQuarantine);
         log.info("Home location updated successfully for userId: {}", request.userId);
+    }
+
+    public void endQuarantine(EndQuarantineRequest request) {
+        // check if this person already in a quarantine or not
+        C19QuarantineStatus alreadyActiveQuarantine = quarantineStatusRepository.findTopByUserIdAndIsActive(request.userId, true);
+        if(alreadyActiveQuarantine == null) {
+            log.error("This person is not in quarantine");
+            throw new BadRequestException("This person is not in quarantine");
+        }
+
+        alreadyActiveQuarantine.endTime = request.endTime;
+        alreadyActiveQuarantine.isActive = false;
+        quarantineStatusRepository.save(alreadyActiveQuarantine);
+        log.info("End time updated successfully for userId: {}", request.userId);
     }
 }

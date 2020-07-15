@@ -1,6 +1,7 @@
 package com.isensor.contacttracingbackend.service;
 
 import com.isensor.contacttracingbackend.communication.request.AddLocationDataRequest;
+import com.isensor.contacttracingbackend.communication.request.EndQuarantineRequest;
 import com.isensor.contacttracingbackend.communication.request.SingleAddLocationDataRequest;
 import com.isensor.contacttracingbackend.db.entity.C19LocationLog;
 import com.isensor.contacttracingbackend.db.entity.C19User;
@@ -25,6 +26,9 @@ public class LocationService {
 
     @Autowired
     private C19LocationLogRepository locationLogRepository;
+
+    @Autowired
+    private QuarantineService quarantineService;
 
     private final Logger log = LoggerFactory.getLogger(LocationService.class);
 
@@ -53,5 +57,7 @@ public class LocationService {
         }
         locationLogRepository.saveAll(locationLogs);
         log.info("{} location data saved for the user: {}", request.locationData.size(), request.userId);
+
+        quarantineService.endQuarantine(new EndQuarantineRequest(request.userId, request.endTime));
     }
 }

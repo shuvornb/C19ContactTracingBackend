@@ -1,13 +1,15 @@
 package com.isensor.contacttracingbackend.communication.request;
 
 public class Location {
+    public String address;
     public Double latitude;
     public Double longitude;
 
     public Location() {
     }
 
-    public Location(Double latitude, Double longitude) {
+    public Location(String address, Double latitude, Double longitude) {
+        this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
     }
@@ -15,7 +17,8 @@ public class Location {
     @Override
     public String toString() {
         return "Location{" +
-                "latitude=" + latitude +
+                "address='" + address + '\'' +
+                ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 '}';
     }
