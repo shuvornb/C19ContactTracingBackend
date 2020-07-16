@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface C19QuarantineStatusRepository extends JpaRepository<C19QuarantineStatus, Long> {
     C19QuarantineStatus findTopByUserIdAndIsActive(Long userId, Boolean isActive);
+    C19QuarantineStatus findTopByUserIdAndIsActiveOrderByStartTimeDesc(Long userId, Boolean isActive);
 }

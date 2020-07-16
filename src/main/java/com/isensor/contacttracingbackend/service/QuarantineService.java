@@ -1,11 +1,13 @@
 package com.isensor.contacttracingbackend.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.isensor.contacttracingbackend.communication.request.EndQuarantineRequest;
-import com.isensor.contacttracingbackend.communication.request.StartQuarantineRequest;
-import com.isensor.contacttracingbackend.communication.request.UpdateHomeLocationRequest;
+import com.isensor.contacttracingbackend.communication.request.*;
+import com.isensor.contacttracingbackend.communication.response.FetchQuarantineSummaryResponse;
+import com.isensor.contacttracingbackend.db.entity.C19LocationLog;
 import com.isensor.contacttracingbackend.db.entity.C19QuarantineStatus;
+import com.isensor.contacttracingbackend.db.repository.C19LocationLogRepository;
 import com.isensor.contacttracingbackend.db.repository.C19QuarantineStatusRepository;
 import com.isensor.contacttracingbackend.exception.BadRequestException;
 import org.slf4j.Logger;
@@ -13,11 +15,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class QuarantineService {
 
     @Autowired
     private C19QuarantineStatusRepository quarantineStatusRepository;
+
+    @Autowired
+    private C19LocationLogRepository locationLogRepository;
 
     private final Logger log = LoggerFactory.getLogger(QuarantineService.class);
 
@@ -76,5 +84,38 @@ public class QuarantineService {
         alreadyActiveQuarantine.isActive = false;
         quarantineStatusRepository.save(alreadyActiveQuarantine);
         log.info("End time updated successfully for userId: {}", request.userId);
+    }
+
+    public FetchQuarantineSummaryResponse fetchQuarantineSummary(Long userId) {
+        // check if this person was in a quarantine or not
+        C19QuarantineStatus quarantineStatus = quarantineStatusRepository.findTopByUserIdAndIsActiveOrderByStartTimeDesc(userId, false);
+        if(quarantineStatus == null) {
+            log.error("This person was never in a quarantine");
+            throw new BadRequestException("This person was never in a quarantine");
+        }
+
+        FetchQuarantineSummaryResponse response = new FetchQuarantineSummaryResponse();
+        response.startTime = quarantineStatus.startTime;
+        response.endTime = quarantineStatus.endTime;
+        List<Location> homeLocationCoordinates = null;
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            homeLocationCoordinates = objectMapper.readValue(quarantineStatus.homeLocationCoordinates, new TypeReference<List<Location>>() {});
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        response.homeLocationData = homeLocationCoordinates;
+
+        List<C19LocationLog> locationLogList = locationLogRepository.findByUserIdAndCreatedAtGreaterThanAndCreatedAtLessThan(userId, quarantineStatus.startTime, quarantineStatus.endTime);
+        List<SingleAddLocationDataRequest> locationDataRequestList = new ArrayList<>();
+        for(C19LocationLog log : locationLogList) {
+            SingleAddLocationDataRequest data = new SingleAddLocationDataRequest();
+            data.latitude = log.latitude;
+            data.longitude = log.longitude;
+            data.createdAt = log.createdAt;
+            locationDataRequestList.add(data);
+        }
+        response.locationData = locationDataRequestList;
+        return response;
     }
 }
