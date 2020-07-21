@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.isensor.contacttracingbackend.communication.request.*;
 import com.isensor.contacttracingbackend.communication.response.FetchQuarantineSummaryResponse;
+import com.isensor.contacttracingbackend.communication.response.StartQuarantineResponse;
 import com.isensor.contacttracingbackend.db.entity.C19LocationLog;
 import com.isensor.contacttracingbackend.db.entity.C19QuarantineStatus;
 import com.isensor.contacttracingbackend.db.repository.C19LocationLogRepository;
@@ -13,6 +14,7 @@ import com.isensor.contacttracingbackend.exception.BadRequestException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,9 +29,12 @@ public class QuarantineService {
     @Autowired
     private C19LocationLogRepository locationLogRepository;
 
+    @Value("${quarantine.period}")
+    private Integer quarantinePeriod;
+
     private final Logger log = LoggerFactory.getLogger(QuarantineService.class);
 
-    public void startQuarantine(StartQuarantineRequest request) {
+    public StartQuarantineResponse startQuarantine(StartQuarantineRequest request) {
         // check if this person already in a quarantine or not
         C19QuarantineStatus alreadyActiveQuarantine = quarantineStatusRepository.findTopByUserIdAndIsActive(request.userId, true);
         if(alreadyActiveQuarantine != null) {
@@ -44,7 +49,11 @@ public class QuarantineService {
         quarantineStatus.isActive = true;
 
         quarantineStatusRepository.save(quarantineStatus);
-        log.info("Quarantine started successfully for userId: {}", request.userId);
+        StartQuarantineResponse response = new StartQuarantineResponse();
+        response.message = "Quarantine started successfully";
+        response.userId = request.userId;
+        response.quarantinePeriod = quarantinePeriod;
+        return response;
     }
 
     public void updateHomeLocation(UpdateHomeLocationRequest request) {

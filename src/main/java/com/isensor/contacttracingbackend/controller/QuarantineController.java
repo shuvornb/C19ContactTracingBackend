@@ -4,6 +4,7 @@ import com.isensor.contacttracingbackend.communication.request.StartQuarantineRe
 import com.isensor.contacttracingbackend.communication.request.UpdateHomeLocationRequest;
 import com.isensor.contacttracingbackend.communication.response.FetchQuarantineSummaryResponse;
 import com.isensor.contacttracingbackend.communication.response.OKResponse;
+import com.isensor.contacttracingbackend.communication.response.StartQuarantineResponse;
 import com.isensor.contacttracingbackend.service.QuarantineService;
 import com.isensor.contacttracingbackend.util.JWTUtils;
 import org.slf4j.Logger;
@@ -25,11 +26,10 @@ public class QuarantineController {
     private Logger log = LoggerFactory.getLogger(QuarantineController.class);
 
     @RequestMapping(value = "/start", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public OKResponse startQuarantine(@RequestParam(name = "token", required = false) String token, @RequestBody StartQuarantineRequest request) {
+    public StartQuarantineResponse startQuarantine(@RequestParam(name = "token", required = false) String token, @RequestBody StartQuarantineRequest request) {
         log.info("Start Quarantine API Invoked.");
         jwtUtils.validateToken(token);
-        quarantineService.startQuarantine(request);
-        return new OKResponse("Quarantine started successfully");
+        return quarantineService.startQuarantine(request);
     }
 
     @RequestMapping(value = "/home-location", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
