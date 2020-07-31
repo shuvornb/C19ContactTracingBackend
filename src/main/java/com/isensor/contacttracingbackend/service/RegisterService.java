@@ -16,11 +16,14 @@ import com.isensor.contacttracingbackend.exception.ConflictException;
 import com.isensor.contacttracingbackend.exception.NotAcceptableException;
 import com.isensor.contacttracingbackend.exception.NotFoundException;
 import com.isensor.contacttracingbackend.util.JWTUtils;
-import org.hibernate.annotations.Fetch;
+import com.twilio.Twilio;
+import com.twilio.rest.api.v2010.account.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Random;
 
 @Service
 public class RegisterService {
@@ -36,6 +39,10 @@ public class RegisterService {
 
     private Logger log = LoggerFactory.getLogger(RegisterService.class);
     private static final int VERIFICATION_CODE_EXPIRY_TIME = 5*60*1000;
+    public static final String ACCOUNT_SID = "AC9400b6b0b7e60e1ad327fd48cda9d3c8";
+    public static final String AUTH_TOKEN = "89b3f1c3713bcd1db2a4e99accc291f5";
+    public static final String TWILIO_PHONE_NUMBER = "+14582243905";
+
 
     public PhoneVerificationResponse addAPhoneNumber(String phoneNumber) {
         log.info("The phone number to register is: {}", phoneNumber);
@@ -76,10 +83,18 @@ public class RegisterService {
     }
 
     private void sendVerificationCodeInSMS(String phoneNumber, Integer verificationCode) {
+        Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+        Message message = Message.creator(
+                new com.twilio.type.PhoneNumber(phoneNumber),
+                new com.twilio.type.PhoneNumber(TWILIO_PHONE_NUMBER),
+                verificationCode + " is your CV19 SelfDefense verification code.")
+                .create();
+
+        log.info("Sent Message: " + message.getSid());
     }
 
     private Integer generateRandomVerificationCode() {
-        return 123456;
+        return new Random().nextInt(900000) + 100000;
     }
 
     public void verifyPhoneNumber(VerifyPhoneNumberRequest request) {
