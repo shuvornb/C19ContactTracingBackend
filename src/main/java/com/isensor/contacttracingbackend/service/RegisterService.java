@@ -21,6 +21,7 @@ import com.twilio.rest.api.v2010.account.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
@@ -39,9 +40,18 @@ public class RegisterService {
 
     private Logger log = LoggerFactory.getLogger(RegisterService.class);
     private static final int VERIFICATION_CODE_EXPIRY_TIME = 5*60*1000;
-    public static final String ACCOUNT_SID = "AC9400b6b0b7e60e1ad327fd48cda9d3c8";
-    public static final String AUTH_TOKEN = "89b3f1c3713bcd1db2a4e99accc291f5";
-    public static final String TWILIO_PHONE_NUMBER = "+14582243905";
+
+    @Value("${account.sid}")
+    private String ACCOUNT_SID;
+
+    @Value("${auth.token}")
+    private String AUTH_TOKEN;
+
+    @Value("${phone.number}")
+    private String TWILIO_PHONE_NUMBER;
+
+
+    private Integer quarantinePeriod;
 
 
     public PhoneVerificationResponse addAPhoneNumber(String phoneNumber) {
