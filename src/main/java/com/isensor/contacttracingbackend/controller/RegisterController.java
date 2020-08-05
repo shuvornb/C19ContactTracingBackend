@@ -2,9 +2,9 @@ package com.isensor.contacttracingbackend.controller;
 
 import com.isensor.contacttracingbackend.communication.request.LoginRequest;
 import com.isensor.contacttracingbackend.communication.request.SignupRequest;
-import com.isensor.contacttracingbackend.communication.response.*;
+import com.isensor.contacttracingbackend.communication.request.UpdatePasswordRequest;
 import com.isensor.contacttracingbackend.communication.request.VerifyPhoneNumberRequest;
-import com.isensor.contacttracingbackend.db.entity.C19User;
+import com.isensor.contacttracingbackend.communication.response.*;
 import com.isensor.contacttracingbackend.service.RegisterService;
 import com.isensor.contacttracingbackend.util.JWTUtils;
 import org.slf4j.Logger;
@@ -55,5 +55,13 @@ public class RegisterController {
         log.info("Fetch Profile Info API Invoked.");
         jwtUtils.validateToken(token);
         return registerService.fetchProfileInfo(userId);
+    }
+
+    @RequestMapping(value = "/password", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public OKResponse updatePassword(@RequestParam(name = "token", required = false) String token, @RequestBody UpdatePasswordRequest request) {
+        log.info("Update Password API Invoked.");
+        jwtUtils.validateToken(token);
+        registerService.updatePassword(request);
+        return new OKResponse("Password updated successfully");
     }
 }

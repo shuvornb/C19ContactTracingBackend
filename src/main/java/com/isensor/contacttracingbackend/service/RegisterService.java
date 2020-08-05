@@ -2,6 +2,7 @@ package com.isensor.contacttracingbackend.service;
 
 import com.isensor.contacttracingbackend.communication.request.LoginRequest;
 import com.isensor.contacttracingbackend.communication.request.SignupRequest;
+import com.isensor.contacttracingbackend.communication.request.UpdatePasswordRequest;
 import com.isensor.contacttracingbackend.communication.request.VerifyPhoneNumberRequest;
 import com.isensor.contacttracingbackend.communication.response.FetchProfileInfoResponse;
 import com.isensor.contacttracingbackend.communication.response.LoginResponse;
@@ -179,6 +180,33 @@ public class RegisterService {
         response.userId = user.id;
         response.message = "Signup process completed";
         return response;
+    }
+
+    public void updatePassword(UpdatePasswordRequest request) {
+        log.info("Update signup request: {}", request);
+        // check if this user exists in the database or not
+        C19User user = userRepository.findTopById(request.userId);
+        if(user == null) {
+            log.info("No user with userId: " + request.userId + " exists");
+            throw new BadRequestException("No user with userId: " + request.userId + " exists");
+        }
+
+        // check if the old password matches or not
+        if(!user.password.equals(request.oldPassword)) {
+            log.info("Old password does not matches");
+            throw new BadRequestException("Old password does not matches");
+        }
+
+        // check if the old password matches or not
+        if(request.oldPassword.equals(request.newPassword)) {
+            log.info("Both old and new passwords are same");
+            throw new BadRequestException("Both old and new passwords are same");
+        }
+
+        // update the user object and save it
+        user.password = request.newPassword;
+        userRepository.save(user);
+        log.info("Password updated successfully");
     }
 
     public LoginResponse login(LoginRequest request){
