@@ -84,7 +84,7 @@ public class RegisterService {
         log.info("New verification code has been generated for this phone number");
 
         // asynchronously send out the sms with verification code
-        sendVerificationCodeInSMS(phoneNumber, verificationCode);
+        //sendVerificationCodeInSMS(phoneNumber, verificationCode);
 
         // respond with the id
         PhoneVerificationResponse response = new PhoneVerificationResponse();
@@ -105,7 +105,8 @@ public class RegisterService {
     }
 
     private Integer generateRandomVerificationCode() {
-        return new Random().nextInt(900000) + 100000;
+        //return new Random().nextInt(900000) + 100000;
+        return 6450406;
     }
 
     public void verifyPhoneNumber(VerifyPhoneNumberRequest request) {
